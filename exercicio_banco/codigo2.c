@@ -4,7 +4,7 @@
 typedef struct
 {
     char nome[50];
-    char rg[50];
+    int rg[50];
     int numero;
 
 } usuario;
@@ -19,7 +19,7 @@ typedef struct
 void ImprimePessoa(usuario users[], automovel carro[], int quantidade) // declara o parâmetro como uma struct
 {
 
-    for (int i = 0; i <= quantidade; i++)
+    for (int i = 0; i <= quantidade - 1; i++)
     {
         printf("Nome: %s,  rg: %s,  celular: %d\npossui o carro: %s, com placa: %d\n", users[i].nome, users[i].rg, users[i].numero, carro[i].nomeDoCarro, carro[i].placa);
     }
@@ -48,7 +48,7 @@ int AdicionaPessoa(usuario users[], automovel carros[], int quantidade, int orde
 
     contagemLegada = ordemAutomovel + contagemLegada;
 
-    for (int j = 0; j <= quantidadeCarros; j++)
+    for (int j = 1; j <= quantidadeCarros; j++)
     {
         printf("adicione o nome do carro %d: ", j);
         scanf("%s", &(carros[contagemLegada].nomeDoCarro));
@@ -67,6 +67,9 @@ int main(void)
     int escolha = 0;
     usuario usuarios[10000];
     automovel carros[100000];
+    int contagemInicial = 0;
+    int contagemFinal = 0;
+    int quantidade = 0;
 
     while (escolha != 3)
     {
@@ -74,5 +77,22 @@ int main(void)
         printf("1 - adicionar usuários e automoveis\n2 - verificar usuarios e automoveis adicionados\n3 - sair do programa\n");
 
         scanf("%d", &escolha);
+
+        switch (escolha)
+        {
+        case 1:
+            /* code */
+            contagemInicial = contagemFinal + contagemInicial;
+            contagemFinal = AdicionaPessoa(usuarios, carros, quantidade, contagemInicial);
+            quantidade++;
+            break;
+        case 2:
+            ImprimePessoa(usuarios, carros, contagemFinal);
+            break;
+
+        default:
+            printf("saiu");
+            break;
+        }
     }
 }
